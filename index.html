@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MUSKA · Espace Privé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --calc:#F5F0E8;--calc-d:#EDE7DA;--blanc:#FAFAF7;
+  --or:#B8841F;--or-l:#C8922A;--or-d:#8E6516;
+  --ard:#1A1714;--ard-m:#2C2723;
+  --grey:#6B6052;--grey-l:#A89A85;
+  --sw:260px;--hh:64px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{font-family:'Montserrat',sans-serif;color:var(--ard);background:var(--ard);overflow:hidden}
+.hidden{display:none!important}
+
+/* ── LOGIN ── */
+.login-screen{
+  position:fixed;inset:0;background:var(--ard);
+  display:flex;align-items:center;justify-content:center;z-index:1000;
+}
+.login-bg{
+  position:absolute;inset:0;pointer-events:none;overflow:hidden;
+}
+.login-bg::before{
+  content:'MUSKA';
+  position:absolute;font-family:'Cormorant Garamond',serif;
+  font-size:32vw;font-weight:300;letter-spacing:.08em;
+  color:rgba(184,132,31,.035);top:50%;left:50%;
+  transform:translate(-50%,-50%);white-space:nowrap;
+}
+.login-bg::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 25% 60%,rgba(184,132,31,.07) 0%,transparent 55%),
+             radial-gradient(ellipse at 75% 30%,rgba(184,132,31,.04) 0%,transparent 45%);
+}
+.login-card{
+  position:relative;z-index:2;
+  background:var(--calc);width:420px;
+  padding:52px 48px 36px;
+  animation:cardIn .65s cubic-bezier(.16,1,.3,1) both;
+}
+.login-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--or-d),var(--or-l),var(--or-d));
+}
+@keyframes cardIn{
+  from{opacity:0;transform:translateY(28px) scale(.97)}
+  to{opacity:1;transform:none}
+}
+.login-brand{text-align:center;margin-bottom:32px}
+.login-eyebrow{
+  font-size:10px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--or-d);font-weight:700;margin-bottom:8px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.login-eyebrow::before,.login-eyebrow::after{content:'◆';font-size:5px;opacity:.6}
+.login-title{
+  font-family:'Cormorant Garamond',serif;font-size:58px;
+  font-weight:300;letter-spacing:.18em;color:var(--ard);line-height:1;
+}
+.login-sub{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:15px;color:var(--grey);letter-spacing:.1em;margin-top:2px;
+}
+.login-rule{
+  width:38px;height:1px;background:var(--or);
+  margin:18px auto 28px;opacity:.55;
+}
+.login-form{display:flex;flex-direction:column;gap:22px}
+.field{position:relative}
+.field input{
+  width:100%;background:transparent;border:none;
+  border-bottom:1px solid rgba(107,96,82,.28);
+  padding:10px 0;font-family:'Montserrat',sans-serif;
+  font-size:14px;color:var(--ard);outline:none;
+  transition:border-color .25s;font-weight:500;
+}
+.field input:focus{border-bottom-color:var(--or-d)}
+.field label{
+  position:absolute;top:10px;left:0;
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--grey);font-weight:600;pointer-events:none;transition:all .2s;
+}
+.field input:focus~label,
+.field input:not(:placeholder-shown)~label{top:-13px;font-size:9px;color:var(--or-d)}
+.field input::placeholder{color:transparent}
+.login-btn{
+  margin-top:6px;width:100%;padding:14px;
+  background:var(--ard);color:var(--calc);border:none;
+  font-family:'Montserrat',sans-serif;font-size:11px;
+  font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  cursor:pointer;transition:background .25s;
+}
+.login-btn:hover{background:var(--or-d)}
+.login-error{
+  font-size:11px;color:#c0392b;text-align:center;
+  min-height:14px;letter-spacing:.04em;font-weight:600;
+}
+.login-error.shake{animation:shake .35s both}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}
+  40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}
+}
+.login-demo{
+  margin-top:24px;padding-top:20px;
+  border-top:1px solid rgba(107,96,82,.12);text-align:center;
+}
+.login-demo p{
+  font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--grey-l);font-weight:700;margin-bottom:10px;
+}
+.demo-chips{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.demo-chip{
+  padding:4px 10px;border:1px solid rgba(184,132,31,.25);
+  font-size:9px;color:var(--or-d);letter-spacing:.1em;
+  text-transform:uppercase;font-weight:700;cursor:pointer;
+  transition:all .2s;background:transparent;
+  font-family:'Montserrat',sans-serif;
+}
+.demo-chip:hover{background:rgba(184,132,31,.1);border-color:var(--or-d)}
+
+/* ── APP SHELL ── */
+.app-shell{
+  height:100vh;display:flex;flex-direction:column;
+  background:var(--calc);animation:fadeIn .3s ease both;
+}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* ── HEADER ── */
+.app-header{
+  height:var(--hh);background:var(--blanc);flex-shrink:0;
+  border-bottom:1px solid rgba(184,132,31,.1);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 24px 0 0;
+  box-shadow:0 1px 12px rgba(26,23,20,.05);z-index:100;
+}
+.hdr-logo{
+  width:var(--sw);height:100%;padding:0 22px;
+  display:flex;align-items:center;gap:10px;
+  border-right:1px solid rgba(184,132,31,.1);flex-shrink:0;
+}
+.hdr-gem{width:8px;height:8px;background:var(--or);transform:rotate(45deg);flex-shrink:0}
+.hdr-wordmark{font-family:'Cormorant Garamond',serif;font-size:21px;letter-spacing:.22em;color:var(--or-d)}
+.hdr-tagline{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--grey-l);font-weight:600;margin-top:1px}
+.hdr-right{display:flex;align-items:center;gap:18px}
+.user-info{text-align:right}
+.user-name{font-size:13px;font-weight:700;color:var(--ard);letter-spacing:.03em}
+.user-role{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--or-d);font-weight:700}
+.user-avatar{
+  width:34px;height:34px;background:var(--or-d);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;color:var(--blanc);letter-spacing:.06em;
+}
+.logout-btn{
+  padding:7px 14px;border:1px solid rgba(107,96,82,.25);background:transparent;
+  font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grey);font-weight:600;cursor:pointer;transition:all .2s;
+}
+.logout-btn:hover{border-color:var(--or-d);color:var(--or-d)}
+
+/* ── BODY LAYOUT ── */
+.app-body{display:flex;flex:1;overflow:hidden}
+
+/* ── SIDEBAR ── */
+.sidebar{
+  width:var(--sw);background:var(--blanc);flex-shrink:0;
+  border-right:1px solid rgba(184,132,31,.1);
+  overflow-y:auto;padding:16px 0 24px;
+}
+.sb-label{
+  font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--grey-l);font-weight:700;padding:10px 20px 6px;
+}
+.nav-item{
+  display:flex;align-items:center;gap:11px;padding:10px 18px;
+  cursor:pointer;transition:all .18s;border-left:2px solid transparent;
+  user-select:none;
+}
+.nav-item:hover{background:rgba(184,132,31,.06)}
+.nav-item.active{
+  border-left-color:var(--or-d);background:rgba(184,132,31,.08);
+}
+.nav-item.active .nav-label{color:var(--or-d)}
+.nav-ico{
+  width:30px;height:30px;border-radius:6px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--calc);transition:background .18s;
+}
+.nav-item.active .nav-ico,.nav-item:hover .nav-ico{background:rgba(184,132,31,.14)}
+.nav-ico svg{
+  width:15px;height:15px;stroke:var(--grey);fill:none;
+  stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;transition:stroke .18s;
+}
+.nav-item.active .nav-ico svg,.nav-item:hover .nav-ico svg{stroke:var(--or-d)}
+.nav-label{font-size:12px;font-weight:600;color:var(--ard-m);letter-spacing:.03em;transition:color .18s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav-count{font-size:10px;color:var(--grey-l);font-weight:500;margin-top:1px}
+.sb-divider{height:1px;background:rgba(184,132,31,.1);margin:8px 18px}
+
+/* ── CONTENT ── */
+.content-area{flex:1;overflow-y:auto;padding:32px 34px;background:var(--calc)}
+.content-hdr{margin-bottom:26px;padding-bottom:22px;border-bottom:1px solid rgba(184,132,31,.14)}
+.c-eyebrow{
+  font-size:9px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--or-d);display:flex;align-items:center;gap:7px;margin-bottom:5px;
+}
+.c-eyebrow::before{content:'◆';font-size:5px;opacity:.7}
+.c-title{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--ard);line-height:1.1}
+.c-desc{font-size:12px;color:var(--grey);margin-top:5px;font-weight:400;letter-spacing:.02em}
+.c-stats{display:flex;gap:16px;margin-top:10px;flex-wrap:wrap}
+.c-stat{font-size:10px;color:var(--grey-l);letter-spacing:.08em;font-weight:600}
+
+/* ── FILE GRID ── */
+.file-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.file-card{
+  background:var(--blanc);border:1px solid rgba(184,132,31,.1);
+  padding:18px;cursor:pointer;transition:transform .22s cubic-bezier(.16,1,.3,1),box-shadow .22s,border-color .22s;
+  position:relative;overflow:hidden;
+}
+.file-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--or-d),var(--or-l));
+  transform:scaleX(0);transform-origin:left;transition:transform .28s ease;
+}
+.file-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(26,23,20,.09);border-color:rgba(184,132,31,.22)}
+.file-card:hover::after{transform:scaleX(1)}
+.f-ico{
+  width:40px;height:40px;border-radius:7px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:12px;font-size:10px;font-weight:800;letter-spacing:.06em;
+}
+.f-ico.pdf{background:rgba(192,57,43,.1);color:#c0392b}
+.f-ico.img{background:rgba(41,128,185,.1);color:#2980b9}
+.f-ico.docx{background:rgba(52,73,94,.1);color:#34495e}
+.f-ico.xlsx{background:rgba(39,174,96,.1);color:#27ae60}
+.f-tag{
+  display:inline-block;padding:2px 7px;font-size:8px;font-weight:800;
+  letter-spacing:.1em;text-transform:uppercase;
+  background:rgba(184,132,31,.1);color:var(--or-d);
+  border-radius:2px;margin-bottom:7px;
+}
+.f-name{font-size:12.5px;font-weight:600;color:var(--ard);line-height:1.4;margin-bottom:3px;letter-spacing:.02em}
+.f-desc{font-size:10.5px;color:var(--grey-l);line-height:1.55;margin-bottom:14px;font-weight:400}
+.f-actions{display:flex;gap:7px}
+.btn-view{
+  flex:1;padding:7px 10px;background:var(--ard);color:var(--calc);
+  border:none;font-family:'Montserrat',sans-serif;font-size:9px;
+  font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  cursor:pointer;transition:background .2s;text-align:center;text-decoration:none;display:inline-block;
+}
+.btn-view:hover{background:var(--or-d)}
+.btn-dl{
+  padding:7px 9px;background:transparent;color:var(--grey);
+  border:1px solid rgba(107,96,82,.22);cursor:pointer;
+  transition:all .2s;display:flex;align-items:center;text-decoration:none;
+}
+.btn-dl:hover{border-color:var(--or-d);color:var(--or-d)}
+.btn-dl svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── PDF MODAL ── */
+.pdf-modal{
+  position:fixed;inset:0;z-index:500;
+  display:flex;flex-direction:column;animation:fadeIn .18s ease both;
+}
+.pdf-hdr{
+  height:50px;background:var(--ard);
+  display:flex;align-items:center;padding:0 18px;gap:14px;flex-shrink:0;
+}
+.pdf-title{
+  flex:1;font-size:12px;font-weight:600;color:var(--calc);
+  letter-spacing:.06em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.modal-close,.modal-dl{
+  width:30px;height:30px;background:rgba(245,240,232,.1);border:none;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:background .18s;flex-shrink:0;text-decoration:none;
+}
+.modal-close:hover,.modal-dl:hover{background:rgba(245,240,232,.2)}
+.modal-close svg,.modal-dl svg{width:14px;height:14px;stroke:var(--calc);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pdf-iframe{flex:1;border:none;background:#fff}
+
+/* ── IMAGE MODAL ── */
+.img-modal{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(26,23,20,.96);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;animation:fadeIn .18s ease both;
+}
+.img-close{
+  position:absolute;top:18px;right:18px;
+  width:38px;height:38px;background:rgba(245,240,232,.1);border:none;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .18s;
+}
+.img-close:hover{background:rgba(245,240,232,.2)}
+.img-close svg{width:17px;height:17px;stroke:var(--calc);fill:none;stroke-width:2;stroke-linecap:round}
+.img-content{max-width:90vw;max-height:84vh;object-fit:contain;animation:imgIn .28s cubic-bezier(.16,1,.3,1) both;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+@keyframes imgIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+.img-caption{margin-top:14px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--grey-l);font-weight:600}
+.img-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:40px;height:40px;background:rgba(245,240,232,.08);border:none;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .18s;
+}
+.img-nav:hover{background:rgba(245,240,232,.16)}
+.img-nav svg{width:18px;height:18px;stroke:var(--calc);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.img-nav.prev{left:18px}
+.img-nav.next{right:18px}
+
+/* ── RESERVATION TABLE ── */
+.resa-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px;flex-wrap:wrap}
+.resa-filters{display:flex;gap:5px;flex-wrap:wrap}
+.rf{
+  padding:5px 11px;border:1px solid rgba(107,96,82,.2);background:transparent;
+  font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--grey);cursor:pointer;transition:all .18s;
+}
+.rf:hover{border-color:var(--or-d);color:var(--or-d)}
+.rf.active{background:var(--ard);color:var(--calc);border-color:var(--ard)}
+.rf-sep{width:1px;background:rgba(107,96,82,.18);margin:0 3px;align-self:stretch}
+.resa-kpis{display:flex;gap:24px;flex-shrink:0}
+.resa-kpi .kv{
+  font-family:'Cormorant Garamond',serif;font-size:30px;
+  font-weight:300;line-height:1;color:var(--ard);
+}
+.resa-kpi .kl{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey-l);font-weight:600;margin-top:2px}
+.resa-kpi.green .kv{color:#27ae60}
+.resa-kpi.red .kv{color:#c0392b}
+.lots-table{width:100%;border-collapse:collapse;font-size:12px}
+.lots-table thead tr{background:var(--ard)}
+.lots-table th{
+  padding:10px 14px;font-size:9px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--calc);text-align:left;white-space:nowrap;
+}
+.lots-table td{
+  padding:9px 14px;border-bottom:1px solid rgba(184,132,31,.07);
+  background:var(--blanc);transition:background .15s;
+}
+.lots-table tbody tr:hover td{background:rgba(184,132,31,.04)}
+.lots-table tbody tr:last-child td{border-bottom:none}
+.lot-num{font-weight:700;color:var(--ard);letter-spacing:.06em;font-size:12px}
+.lot-type{
+  display:inline-block;padding:2px 7px;font-size:9px;font-weight:800;
+  letter-spacing:.08em;border-radius:2px;text-transform:uppercase;
+}
+.lot-type.T2{background:rgba(41,128,185,.1);color:#2475a8}
+.lot-type.T3{background:rgba(39,174,96,.1);color:#1e8449}
+.lot-type.T4{background:rgba(142,101,22,.12);color:var(--or-d)}
+.lot-type.T5{background:rgba(26,23,20,.08);color:var(--ard)}
+.lot-surface{font-weight:600;color:var(--ard)}
+.lot-etage{font-size:11px;color:var(--grey);font-weight:500}
+.lot-orient{font-size:11px;font-weight:600;color:var(--grey);letter-spacing:.04em}
+.lot-prix{font-weight:600;color:var(--ard);font-size:12px;white-space:nowrap}
+.lot-statut{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+}
+.lot-statut::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.lot-statut.libre{color:#1e8449}
+.lot-statut.libre::before{background:#27ae60}
+.lot-statut.reserve{color:#c0392b}
+.lot-statut.reserve::before{background:#c0392b}
+
+/* ── CALENDRIER ── */
+.cal-timeline{position:relative;padding-left:36px;max-width:680px}
+.cal-timeline::before{
+  content:'';position:absolute;left:6px;top:10px;bottom:10px;
+  width:1px;background:rgba(184,132,31,.2);
+}
+.cal-item{
+  position:relative;margin-bottom:20px;
+  opacity:0;transform:translateX(-10px);
+  transition:opacity .38s ease,transform .38s ease;
+}
+.cal-item.visible{opacity:1;transform:none}
+.cal-dot{
+  position:absolute;left:-36px;top:14px;
+  width:13px;height:13px;border-radius:50%;
+  border:2px solid var(--grey-l);background:var(--calc);flex-shrink:0;
+}
+.cal-item.done .cal-dot{background:var(--or-d);border-color:var(--or-d)}
+.cal-item.current .cal-dot{
+  background:var(--or);border-color:var(--or);
+  box-shadow:0 0 0 5px rgba(184,132,31,.18);
+  animation:cpulse 2s ease-in-out infinite;
+}
+@keyframes cpulse{
+  0%,100%{box-shadow:0 0 0 5px rgba(184,132,31,.18)}
+  50%{box-shadow:0 0 0 9px rgba(184,132,31,.06)}
+}
+.cal-card{
+  background:var(--blanc);border:1px solid rgba(184,132,31,.1);
+  padding:14px 52px 14px 16px;position:relative;
+}
+.cal-item.current .cal-card{border-color:var(--or);border-left:2px solid var(--or)}
+.cal-item.done .cal-card{border-color:rgba(184,132,31,.15)}
+.cal-date{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--or-d);margin-bottom:2px}
+.cal-label{font-size:13px;font-weight:700;color:var(--ard);letter-spacing:.03em;margin-bottom:2px}
+.cal-detail{font-size:11px;color:var(--grey);line-height:1.5}
+.cal-badge{
+  position:absolute;top:50%;right:14px;transform:translateY(-50%);
+  font-size:8px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  padding:3px 8px;white-space:nowrap;
+}
+.cal-badge.done{background:rgba(142,101,22,.1);color:var(--or-d)}
+.cal-badge.current{background:rgba(184,132,31,.15);color:var(--or)}
+.cal-badge.upcoming{background:rgba(107,96,82,.08);color:var(--grey-l)}
+
+/* ── WELCOME ── */
+.welcome{
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;height:100%;text-align:center;padding:60px;
+  animation:fadeIn .4s ease both;
+}
+.welcome-orn{
+  font-family:'Cormorant Garamond',serif;font-size:72px;
+  font-weight:300;color:var(--or-d);opacity:.12;margin-bottom:16px;line-height:1;
+}
+.welcome-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--ard);margin-bottom:6px}
+.welcome-sub{font-size:12px;color:var(--grey);font-weight:400}
+
+/* ── RESPONSIVE ── */
+@media(max-width:720px){
+  :root{--sw:0px}
+  .sidebar{display:none}
+  .hdr-logo{width:auto;border-right:none}
+  .content-area{padding:18px 14px}
+  .file-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="ls" class="login-screen">
+  <div class="login-bg"></div>
+  <div class="login-card">
+    <div class="login-brand">
+      <p class="login-eyebrow">Résidence</p>
+      <h1 class="login-title">MUSKA</h1>
+      <p class="login-sub">Frontignan · Espace Privé</p>
+      <div class="login-rule"></div>
+    </div>
+    <form class="login-form" id="lf" novalidate>
+      <div class="field">
+        <input type="text" id="li" placeholder="id" autocomplete="username" spellcheck="false">
+        <label for="li">Identifiant</label>
+      </div>
+      <div class="field">
+        <input type="password" id="lp" placeholder="pw" autocomplete="current-password">
+        <label for="lp">Mot de passe</label>
+      </div>
+      <div id="lerr" class="login-error"></div>
+      <button type="submit" class="login-btn">Accéder à l'espace privé</button>
+    </form>
+    <div class="login-demo">
+      <p>Accès démo — cliquez pour remplir</p>
+      <div class="demo-chips">
+        <button type="button" class="demo-chip" onclick="fillDemo('admin')">Admin</button>
+        <button type="button" class="demo-chip" onclick="fillDemo('client')">Client</button>
+        <button type="button" class="demo-chip" onclick="fillDemo('acquereur')">Acquéreur</button>
+        <button type="button" class="demo-chip" onclick="fillDemo('partenaire')">Partenaire</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" class="app-shell hidden">
+  <header class="app-header">
+    <div class="hdr-logo">
+      <div class="hdr-gem"></div>
+      <div><div class="hdr-wordmark">MUSKA</div><div class="hdr-tagline">Résidence · Frontignan</div></div>
+    </div>
+    <div class="hdr-right">
+      <div class="user-info">
+        <div class="user-name" id="uName"></div>
+        <div class="user-role" id="uRole"></div>
+      </div>
+      <div class="user-avatar" id="uAv"></div>
+      <button class="logout-btn" onclick="logout()">Déconnexion</button>
+    </div>
+  </header>
+  <div class="app-body">
+    <aside class="sidebar" id="sb"></aside>
+    <main class="content-area" id="ca">
+      <div class="welcome">
+        <div class="welcome-orn">◆</div>
+        <div class="welcome-title">Bienvenue dans votre espace</div>
+        <div class="welcome-sub">Sélectionnez une catégorie dans le menu</div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- PDF MODAL -->
+<div id="pm" class="pdf-modal hidden">
+  <div class="pdf-hdr">
+    <div class="pdf-title" id="ptitle"></div>
+    <a id="pdl" class="modal-dl" download title="Télécharger">
+      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+    </a>
+    <button class="modal-close" onclick="closePdf()">
+      <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <iframe id="piframe" class="pdf-iframe" src=""></iframe>
+</div>
+
+<!-- IMAGE MODAL -->
+<div id="im" class="img-modal hidden">
+  <button class="img-nav prev" id="iprev" onclick="imgNav(-1)">
+    <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+  </button>
+  <img id="iimg" class="img-content" src="" alt="">
+  <p class="img-caption" id="icap"></p>
+  <button class="img-nav next" id="inext" onclick="imgNav(1)">
+    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+  </button>
+  <button class="img-close" onclick="closeImg()">
+    <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+</div>
+
+<script>
+/* ── CONFIG ── */
+const USERS = {
+  'admin':          {role:'admin',      name:'Administration',   initials:'AD'},
+  'admin@muska.fr': {role:'admin',      name:'Administration',   initials:'AD'},
+  'client':         {role:'client',     name:'Espace Client',    initials:'CL'},
+  'acquereur':      {role:'acquereur',  name:'Espace Acquéreur', initials:'AQ'},
+  'partenaire':     {role:'partenaire', name:'Espace Partenaire',initials:'PT'},
+};
+const RLABELS = {admin:'Administrateur',client:'Client',acquereur:'Acquéreur',partenaire:'Partenaire'};
+
+const ICO = {
+  bag:   '<path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>',
+  eye:   '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>',
+  home:  '<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+  grid:  '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>',
+  bldg:  '<path d="M3 21h18M3 7l9-4 9 4M4 21V7M20 21V7M9 21v-6h6v6"/>',
+  doc:   '<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>',
+  tool:  '<path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>',
+  star:  '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+  price: '<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>',
+  cal:   '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
+  time:  '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+};
+
+const SECTIONS = [
+  {
+    id:'commercial', label:'Documents Commerciaux', icon:'bag',
+    desc:'Plaquette de présentation, catalogue TMA et supports marketing',
+    roles:['admin','client','acquereur'],
+    files:[
+      {name:'Plaquette Commerciale',      path:'files/client/plaquette-commerciale.pdf', type:'pdf', desc:'Présentation complète de la résidence MUSKA'},
+      {name:'Catalogue TMA MUSKA',        path:'files/client/catalogue-tma.pdf',          type:'pdf', desc:'Travaux Modificatifs Acquéreurs — options & finitions'},
+      {name:'Flyer MUSKA — Recto',        path:'files/client/flyer-1.png',                type:'img', desc:'Support marketing — face recto'},
+      {name:'Flyer MUSKA — Verso',        path:'files/client/flyer-2.png',                type:'img', desc:'Support marketing — face verso'},
+    ]
+  },
+  {
+    id:'visuals', label:'Visuels & Rendus 3D', icon:'eye',
+    desc:'Rendus architecturaux et perspectives 3D des appartements',
+    roles:['admin','client','acquereur'],
+    files:[
+      {name:'Rendu 3D — T2', path:'files/client/plans/3d-t2.png',          type:'img', desc:'Appartement T2 — vue 3D', tag:'T2'},
+      {name:'Rendu 3D — T3', path:'files/client/plans/3d-t3.png',          type:'img', desc:'Appartement T3 — vue 3D', tag:'T3'},
+      {name:'Rendu 3D — T4', path:'files/client/plans/3d-t4.png',          type:'img', desc:'Appartement T4 — vue 3D', tag:'T4'},
+      {name:'Rendu 3D — T5', path:'files/client/plans/3d-t5.png',          type:'img', desc:'Appartement T5 — vue 3D', tag:'T5'},
+      {name:'Visuel Archi — T2', path:'files/client/plans/visuel-t2-archi.png', type:'img', desc:'Style architectural T2', tag:'T2'},
+      {name:'Visuel Archi — T3', path:'files/client/plans/visuel-t3-archi.png', type:'img', desc:'Style architectural T3', tag:'T3'},
+      {name:'Visuel Archi — T4', path:'files/client/plans/visuel-t4-archi.png', type:'img', desc:'Style architectural T4', tag:'T4'},
+      {name:'Visuel Archi — T5', path:'files/client/plans/visuel-t5-archi.png', type:'img', desc:'Style architectural T5', tag:'T5'},
+    ]
+  },
+  {
+    id:'plans-client', label:'Plans Logements', icon:'home',
+    desc:'Plans des appartements T2 à T5, avec et sans mesures',
+    roles:['client'],
+    files:[
+      {name:'Plan T2 — Avec mesures',  path:'files/client/plans/plan-t2-mesures.pdf',     type:'pdf', desc:'Appartement T2 coté', tag:'T2'},
+      {name:'Plan T2 — Sans mesures',  path:'files/client/plans/plan-t2-sans-mesures.pdf',type:'pdf', desc:'Appartement T2 — épuré', tag:'T2'},
+      {name:'Plan T3 — Avec mesures',  path:'files/client/plans/plan-t3-mesures.pdf',     type:'pdf', desc:'Appartement T3 coté', tag:'T3'},
+      {name:'Plan T3 — Sans mesures',  path:'files/client/plans/plan-t3-sans-mesures.pdf',type:'pdf', desc:'Appartement T3 — épuré', tag:'T3'},
+      {name:'Plan T4 — Avec mesures',  path:'files/client/plans/plan-t4-mesures.pdf',     type:'pdf', desc:'Appartement T4 coté', tag:'T4'},
+      {name:'Plan T4 — Sans mesures',  path:'files/client/plans/plan-t4-sans-mesures.pdf',type:'pdf', desc:'Appartement T4 — épuré', tag:'T4'},
+      {name:'Plan T5 — Avec mesures',  path:'files/client/plans/plan-t5-mesures.pdf',     type:'pdf', desc:'Appartement T5 coté', tag:'T5'},
+      {name:'Plan T5 — Sans mesures',  path:'files/client/plans/plan-t5-sans-mesures.pdf',type:'pdf', desc:'Appartement T5 — épuré', tag:'T5'},
+    ]
+  },
+  {
+    id:'plans-acq', label:'Plans Logements', icon:'home',
+    desc:'Plans de présentation des appartements T2 à T5',
+    roles:['acquereur'],
+    files:[
+      {name:'Plan T2', path:'files/client/plans/plan-t2-sans-mesures.pdf', type:'pdf', desc:'Appartement type T2', tag:'T2'},
+      {name:'Plan T3', path:'files/client/plans/plan-t3-sans-mesures.pdf', type:'pdf', desc:'Appartement type T3', tag:'T3'},
+      {name:'Plan T4', path:'files/client/plans/plan-t4-sans-mesures.pdf', type:'pdf', desc:'Appartement type T4', tag:'T4'},
+      {name:'Plan T5', path:'files/client/plans/plan-t5-sans-mesures.pdf', type:'pdf', desc:'Appartement type T5', tag:'T5'},
+    ]
+  },
+  {
+    id:'plans-pro', label:'Plans Logements', icon:'grid',
+    desc:'Plans techniques T2–T5 avec et sans mesures — usage professionnel',
+    roles:['admin','partenaire'],
+    files:[
+      {name:'Plan T2 — Coté',  path:'files/pro/plans/plan-t2-mesures.pdf',     type:'pdf', desc:'Plan T2 avec mesures', tag:'T2'},
+      {name:'Plan T2 — Épuré', path:'files/pro/plans/plan-t2-sans-mesures.pdf',type:'pdf', desc:'Plan T2 hors mesures', tag:'T2'},
+      {name:'Plan T3 — Coté',  path:'files/pro/plans/plan-t3-mesures.pdf',     type:'pdf', desc:'Plan T3 avec mesures', tag:'T3'},
+      {name:'Plan T3 — Épuré', path:'files/pro/plans/plan-t3-sans-mesures.pdf',type:'pdf', desc:'Plan T3 hors mesures', tag:'T3'},
+      {name:'Plan T4 — Coté',  path:'files/pro/plans/plan-t4-mesures.pdf',     type:'pdf', desc:'Plan T4 avec mesures', tag:'T4'},
+      {name:'Plan T4 — Épuré', path:'files/pro/plans/plan-t4-sans-mesures.pdf',type:'pdf', desc:'Plan T4 hors mesures', tag:'T4'},
+      {name:'Plan T5 — Coté',  path:'files/pro/plans/plan-t5-mesures.pdf',     type:'pdf', desc:'Plan T5 avec mesures', tag:'T5'},
+      {name:'Plan T5 — Épuré', path:'files/pro/plans/plan-t5-sans-mesures.pdf',type:'pdf', desc:'Plan T5 hors mesures', tag:'T5'},
+    ]
+  },
+  {
+    id:'batiment', label:'Plans Bâtiment', icon:'bldg',
+    desc:'Plans de masse, niveaux et coupes du bâtiment',
+    roles:['admin','partenaire'],
+    files:[
+      {name:'Plan de Masse',    path:'files/pro/batiment/plan-de-masse.png',      type:'img', desc:'Plan de masse — Permis de Construire'},
+      {name:'Rez-de-Chaussée', path:'files/pro/batiment/rez-de-chaussee.pdf',    type:'pdf', desc:'Plan du rez-de-chaussée'},
+      {name:'Premier Étage',   path:'files/pro/batiment/premier-etage.pdf',      type:'pdf', desc:'Plan du premier étage'},
+      {name:'Deuxième Étage',  path:'files/pro/batiment/deuxieme-etage.pdf',     type:'pdf', desc:'Plan du deuxième étage'},
+      {name:'Sous-Sol',        path:'files/pro/batiment/sous-sol.pdf',           type:'pdf', desc:'Plan du sous-sol'},
+    ]
+  },
+  {
+    id:'notice', label:'Notices Techniques', icon:'doc',
+    desc:"Notice descriptive, architecturale et d'insertion du projet",
+    roles:['admin','partenaire'],
+    files:[
+      {name:"Notice Architecturale",  path:'files/pro/notice/notice-architecturale.pdf', type:'pdf',  desc:'Notice architecturale complète'},
+      {name:"Notice Descriptive",     path:'files/pro/notice/notice-descriptive.docx',   type:'docx', desc:'Notice descriptive technique MUSKA'},
+      {name:"Notice d'Insertion",     path:'files/pro/notice/notice-insertion.docx',     type:'docx', desc:"Notice d'insertion du projet dans le site"},
+    ]
+  },
+  {
+    id:'travaux', label:'Dossier Travaux', icon:'tool',
+    desc:'DCE, CCAG, CCAP, CCTP, cahiers des charges et DPGF',
+    roles:['admin','partenaire'],
+    files:[
+      {name:'DCE Général',                    path:'files/pro/travaux/dce-general.pdf',                    type:'pdf',  desc:'Dossier de Consultation des Entreprises — général', tag:'DCE'},
+      {name:'DCE Lot 01 — Maçonnerie',        path:'files/pro/travaux/dce-lot01.docx',                    type:'docx', desc:'DCE Lot 01 Maçonnerie Pinelia', tag:'DCE'},
+      {name:'CCAG',                           path:'files/pro/travaux/ccag.pdf',                          type:'pdf',  desc:'Cahier des Clauses Administratives Générales', tag:'CCAG'},
+      {name:'CCAP',                           path:'files/pro/travaux/ccap.pdf',                          type:'pdf',  desc:'Cahier des Clauses Administratives Particulières', tag:'CCAP'},
+      {name:"Lettre d'Appel d'Offre",        path:'files/pro/travaux/lettre-appel-offre.pdf',            type:'pdf',  desc:"Lettre d'appel d'offres", tag:'AO'},
+      {name:'Pièces Financières Lot 03',      path:'files/pro/travaux/pieces-financieres-lot03.xlsx',     type:'xlsx', desc:'DPGF / BPU / DQE — Lot 03', tag:'AO'},
+      {name:'Pièces Financières Lot 03 ★',   path:'files/pro/travaux/pieces-financieres-lot03-avec-prix.xlsx', type:'xlsx', desc:'DPGF / BPU / DQE Lot 03 — avec prix', tag:'AO'},
+      {name:'Pièces Financières Lot 04',      path:'files/pro/travaux/pieces-financieres-lot04.xlsx',     type:'xlsx', desc:'DPGF / BPU / DQE — Lot 04', tag:'AO'},
+      {name:'CCTP Lot 03 — Libre',            path:'files/pro/travaux/cctp-lot03-libre.docx',             type:'docx', desc:'CCTP Lot 03 Revêtements des sols — libre', tag:'CCTP'},
+      {name:'CCTP Lot 03 — Social',           path:'files/pro/travaux/cctp-lot03-social.docx',            type:'docx', desc:'CCTP Lot 03 — social / abordable', tag:'CCTP'},
+      {name:'CCTP Lot 04 — Plâtrerie',        path:'files/pro/travaux/cctp-lot04.docx',                  type:'docx', desc:'CCTP Lot 04 Faux plafonds et plâtrerie', tag:'CCTP'},
+      {name:'CDC — Prestations Libres',       path:'files/pro/travaux/cdc-libre.docx',                   type:'docx', desc:'Cahier des charges — prestations libres', tag:'CDC'},
+      {name:'CDC — Social / Abordable',       path:'files/pro/travaux/cdc-social.docx',                  type:'docx', desc:'Cahier des charges — sociaux abordables', tag:'CDC'},
+      {name:'DPGF Lot 03 — Sols',             path:'files/pro/travaux/dpgf-lot03.xlsx',                  type:'xlsx', desc:'DPGF Lot N°3 — Revêtements de sols durs', tag:'DPGF'},
+      {name:'DPGF Lot 04 — Plâtrerie',        path:'files/pro/travaux/dpgf-lot04.xlsx',                  type:'xlsx', desc:'DPGF Lot N°4 — Plâtrerie, doublages, faux plafonds', tag:'DPGF'},
+    ]
+  },
+  {
+    id:'grille', label:'Grille de Prix', icon:'price',
+    desc:'Tableau de pondération et tarification des lots — Résidence MUSKA',
+    roles:['admin','client','acquereur'],
+    files:[
+      {name:'Grille de Prix — Pondération', path:'files/grille-prix.pdf', type:'pdf', desc:'Grille complète avec pondération, surfaces et tarification par lot'},
+    ]
+  },
+  {
+    id:'reservation', label:'Réservations', icon:'cal',
+    desc:'Disponibilité des lots et suivi des réservations',
+    roles:['admin','client','acquereur'],
+    special:'reservation',
+    files:[],
+  },
+  {
+    id:'calendrier', label:'Calendrier Travaux', icon:'time',
+    desc:'Planning prévisionnel des phases de construction — Résidence MUSKA',
+    roles:['admin','client','acquereur','partenaire'],
+    special:'calendrier',
+    files:[],
+  },
+  {
+    id:'identite', label:'Identité Visuelle', icon:'star',
+    desc:'Logo officiel et charte graphique de la résidence',
+    roles:['admin'],
+    files:[
+      {name:'Logo Résidence MUSKA', path:'files/identite/logo-muska.pdf', type:'pdf', desc:'Logo officiel — tous formats'},
+    ]
+  },
+];
+
+/* ── LOTS ── */
+const LOTS = [
+  // RDC
+  {num:'A16',  type:'T4', surface:77.8, etage:'RDC', orient:'NE', prix:384643,  statut:'libre'},
+  {num:'A17',  type:'T5', surface:86.8, etage:'RDC', orient:'NE', prix:497971,  statut:'libre'},
+  {num:'A18',  type:'T5', surface:89.7, etage:'RDC', orient:'SE', prix:517310,  statut:'libre'},
+  {num:'A19',  type:'T4', surface:72.6, etage:'RDC', orient:'SE', prix:406934,  statut:'libre'},
+  {num:'A20',  type:'T4', surface:74.1, etage:'RDC', orient:'SE', prix:414350,  statut:'libre'},
+  {num:'A21',  type:'T3', surface:60.3, etage:'RDC', orient:'SE', prix:321912,  statut:'libre'},
+  {num:'A22',  type:'T3', surface:58.6, etage:'RDC', orient:'SE', prix:313344,  statut:'libre'},
+  // R+1
+  {num:'A110', type:'T5', surface:102.1,etage:'R+1', orient:'NO', prix:538080,  statut:'libre'},
+  {num:'A115', type:'T2', surface:38.7, etage:'R+1', orient:'NO', prix:203760,  statut:'libre'},
+  {num:'A116', type:'T2', surface:44.1, etage:'R+1', orient:'NO', prix:229680,  statut:'libre'},
+  {num:'A118', type:'T4', surface:77.7, etage:'R+1', orient:'NE', prix:428419,  statut:'libre'},
+  {num:'A119', type:'T3', surface:66.7, etage:'R+1', orient:'NE', prix:366974,  statut:'libre'},
+  {num:'A121', type:'T4', surface:71.6, etage:'R+1', orient:'SE', prix:412301,  statut:'libre'},
+  {num:'A122', type:'T4', surface:71.3, etage:'R+1', orient:'SE', prix:410774,  statut:'libre'},
+  {num:'A123', type:'T3', surface:58.9, etage:'R+1', orient:'SE', prix:323338,  statut:'libre'},
+  // R+2
+  {num:'A210', type:'T5', surface:102.1,etage:'R+2', orient:'NO', prix:508080,  statut:'libre'},
+  {num:'A211', type:'T2', surface:38.5, etage:'R+2', orient:'NO', prix:206496,  statut:'libre'},
+  {num:'A212', type:'T2', surface:37.6, etage:'R+2', orient:'NO', prix:202090,  statut:'libre'},
+  {num:'A213', type:'T3', surface:58.5, etage:'R+2', orient:'NO', prix:304416,  statut:'libre'},
+  {num:'A214', type:'T3', surface:62.3, etage:'R+2', orient:'NO', prix:323021,  statut:'libre'},
+  {num:'A215', type:'T2', surface:38.7, etage:'R+2', orient:'NO', prix:207475,  statut:'libre'},
+  {num:'A216', type:'T2', surface:44.1, etage:'R+2', orient:'NO', prix:233914,  statut:'libre'},
+  {num:'A217', type:'T4', surface:79.2, etage:'R+2', orient:'NO', prix:435763,  statut:'libre'},
+  {num:'A218', type:'T4', surface:77.7, etage:'R+2', orient:'NE', prix:435878,  statut:'libre'},
+  {num:'A219', type:'T3', surface:66.7, etage:'R+2', orient:'NE', prix:373378,  statut:'libre'},
+  {num:'A220', type:'T5', surface:86.5, etage:'R+2', orient:'SE', prix:492264,  statut:'libre'},
+  {num:'A221', type:'T4', surface:71.6, etage:'R+2', orient:'SE', prix:419174,  statut:'libre'},
+  {num:'A222', type:'T4', surface:71.3, etage:'R+2', orient:'SE', prix:417619,  statut:'libre'},
+  {num:'A223', type:'T3', surface:58.9, etage:'R+2', orient:'SE', prix:328992,  statut:'libre'},
+  {num:'A224', type:'T4', surface:69.8, etage:'R+2', orient:'SE', prix:409843,  statut:'libre'},
+];
+
+/* ── PHASES ── */
+const PHASES = [
+  {label:'Études & Conception',                date:'2023',          status:'done',    detail:'Programme architectural, études de faisabilité et conception du projet'},
+  {label:'Dépôt du Permis de Construire',      date:'Janv. 2024',    status:'done',    detail:'Dépôt du dossier de permis de construire en mairie de Frontignan'},
+  {label:'Obtention du Permis de Construire',  date:'Avr. 2024',     status:'done',    detail:'Permis de construire accordé — purge des délais de recours'},
+  {label:'Consultation des Entreprises (DCE)', date:'2024 – 2025',   status:'current', detail:"Constitution des dossiers d'appel d'offres — lots 01, 03, 04 et corps d'état secondaires"},
+  {label:'Démarrage des Travaux',              date:'T2 2025',       status:'upcoming',detail:'Préparation de chantier, installations et terrassement'},
+  {label:'Gros Œuvre',                         date:'T2 – T4 2025',  status:'upcoming',detail:'Fondations, structure béton armé, élévation des niveaux et charpente'},
+  {label:'Mise Hors d\'Eau / Hors d\'Air',     date:'T4 2025',       status:'upcoming',detail:'Couverture, étanchéité toiture-terrasse et pose des menuiseries extérieures'},
+  {label:'Corps d\'État Secondaires',          date:'T1 – T3 2026',  status:'upcoming',detail:'Plâtrerie, doublages, électricité CFO/CFA, plomberie et CVC'},
+  {label:'Finitions & Aménagements',           date:'T3 – T4 2026',  status:'upcoming',detail:'Revêtements de sols, carrelages, équipements cuisine et salle de bain, extérieurs'},
+  {label:'Réception des Travaux',              date:'T4 2026',       status:'upcoming',detail:'Opérations préalables à la réception, levée des réserves et réception officielle'},
+  {label:'Livraisons aux Acquéreurs',          date:'T1 2027',       status:'upcoming',detail:'Remise des clés, état des lieux de remise et prise de possession'},
+];
+
+/* ── STATE ── */
+let CU = null, CS = null, II = 0, IF = [];
+
+/* ── LOGIN ── */
+document.getElementById('lf').addEventListener('submit', e => {
+  e.preventDefault();
+  const val = document.getElementById('li').value.trim().toLowerCase();
+  const u = USERS[val];
+  const err = document.getElementById('lerr');
+  if (!u) {
+    err.textContent = 'Identifiant non reconnu. Veuillez réessayer.';
+    err.className = 'login-error shake';
+    setTimeout(() => err.className = 'login-error', 400);
+    return;
+  }
+  err.textContent = '';
+  CU = u;
+  showDash();
+});
+
+function fillDemo(id) {
+  document.getElementById('li').value = id;
+  document.getElementById('lp').value = '••••';
+}
+
+/* ── DASHBOARD ── */
+function showDash() {
+  document.getElementById('ls').classList.add('hidden');
+  document.getElementById('app').classList.remove('hidden');
+  document.getElementById('uName').textContent = CU.name;
+  document.getElementById('uRole').textContent = RLABELS[CU.role];
+  document.getElementById('uAv').textContent = CU.initials;
+  renderSidebar();
+  const first = SECTIONS.find(s => s.roles.includes(CU.role));
+  if (first) navigate(first.id);
+}
+
+function getMyS() { return SECTIONS.filter(s => s.roles.includes(CU.role)); }
+
+function renderSidebar() {
+  const sections = getMyS();
+  let h = '<div class="sb-label">Navigation</div>';
+  sections.forEach((s, i) => {
+    if (i > 0 && s.id === 'identite') h += '<div class="sb-divider"></div>';
+    h += `<div class="nav-item" id="n-${s.id}" onclick="navigate('${s.id}')">
+      <div class="nav-ico"><svg viewBox="0 0 24 24">${ICO[s.icon]}</svg></div>
+      <div>
+        <div class="nav-label">${s.label}</div>
+        <div class="nav-count">${s.files.length} doc${s.files.length > 1 ? 's' : ''}</div>
+      </div>
+    </div>`;
+  });
+  document.getElementById('sb').innerHTML = h;
+}
+
+function navigate(id) {
+  CS = id;
+  document.querySelectorAll('.nav-item').forEach(e => e.classList.remove('active'));
+  const n = document.getElementById('n-' + id);
+  if (n) n.classList.add('active');
+  const s = SECTIONS.find(x => x.id === id);
+  if (s) renderContent(s);
+}
+
+function renderContent(s) {
+  if (s.special === 'reservation') { renderReservation(s); return; }
+  if (s.special === 'calendrier')  { renderCalendrier(s);  return; }
+  const pdfs = s.files.filter(f => f.type === 'pdf').length;
+  const imgs = s.files.filter(f => f.type === 'img').length;
+  const dls  = s.files.filter(f => f.type === 'docx' || f.type === 'xlsx').length;
+  let stats = '';
+  const si = `<svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle;margin-right:4px">`;
+  if (pdfs) stats += `<span class="c-stat">${si}<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>${pdfs} PDF</span>`;
+  if (imgs) stats += `<span class="c-stat">${si}<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>${imgs} image${imgs > 1 ? 's' : ''}</span>`;
+  if (dls)  stats += `<span class="c-stat">${si}<path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>${dls} à télécharger</span>`;
+
+  const ca = document.getElementById('ca');
+  ca.innerHTML = `
+    <div class="content-hdr">
+      <div class="c-eyebrow">${s.label}</div>
+      <h2 class="c-title">${s.label}</h2>
+      <p class="c-desc">${s.desc}</p>
+      <div class="c-stats">${stats}</div>
+    </div>
+    <div class="file-grid">${s.files.map(fc).join('')}</div>`;
+
+  ca.querySelectorAll('.file-card').forEach((el, i) => {
+    el.style.cssText = `opacity:0;transform:translateY(14px);transition:opacity .32s ease ${i*45}ms,transform .32s ease ${i*45}ms,box-shadow .22s,border-color .22s,transform .22s cubic-bezier(.16,1,.3,1)`;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      el.style.opacity = '1'; el.style.transform = 'translateY(0)';
+    }));
+  });
+}
+
+function fmt(n){ return n.toLocaleString('fr-FR') + ' €'; }
+
+function renderReservation(s) {
+  const total   = LOTS.length;
+  const libres  = LOTS.filter(l => l.statut === 'libre').length;
+  const reserves= total - libres;
+  const ca = document.getElementById('ca');
+
+  ca.innerHTML = `
+    <div class="content-hdr">
+      <div class="c-eyebrow">${s.label}</div>
+      <h2 class="c-title">Réservations</h2>
+      <p class="c-desc">${s.desc}</p>
+    </div>
+    <div class="resa-toolbar">
+      <div class="resa-filters">
+        <button class="rf active" data-f="all">Tous (${total})</button>
+        <div class="rf-sep"></div>
+        <button class="rf" data-f="RDC">RDC</button>
+        <button class="rf" data-f="R+1">R+1</button>
+        <button class="rf" data-f="R+2">R+2</button>
+        <div class="rf-sep"></div>
+        <button class="rf" data-f="T2">T2</button>
+        <button class="rf" data-f="T3">T3</button>
+        <button class="rf" data-f="T4">T4</button>
+        <button class="rf" data-f="T5">T5</button>
+      </div>
+      <div class="resa-kpis">
+        <div class="resa-kpi"><div class="kv">${total}</div><div class="kl">Lots</div></div>
+        <div class="resa-kpi green"><div class="kv">${libres}</div><div class="kl">Disponibles</div></div>
+        <div class="resa-kpi red"><div class="kv">${reserves}</div><div class="kl">Réservés</div></div>
+      </div>
+    </div>
+    <table class="lots-table">
+      <thead><tr>
+        <th>N° Lot</th><th>Type</th><th>Surface</th>
+        <th>Niveau</th><th>Orientation</th><th>Prix TTC</th><th>Statut</th>
+      </tr></thead>
+      <tbody id="lotsBody"></tbody>
+    </table>`;
+
+  renderLots('all');
+
+  document.querySelectorAll('.rf').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.rf').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      renderLots(this.dataset.f);
+    });
+  });
+}
+
+function renderLots(filter) {
+  const tbody = document.getElementById('lotsBody');
+  if (!tbody) return;
+  const list = filter === 'all' ? LOTS : LOTS.filter(l => l.etage === filter || l.type === filter);
+  tbody.innerHTML = list.map((l,i) => `
+    <tr style="opacity:0;transition:opacity .25s ease ${i*30}ms" class="lot-row">
+      <td class="lot-num">${l.num}</td>
+      <td><span class="lot-type ${l.type}">${l.type}</span></td>
+      <td class="lot-surface">${l.surface} m²</td>
+      <td class="lot-etage">${l.etage}</td>
+      <td class="lot-orient">${l.orient}</td>
+      <td class="lot-prix">${fmt(l.prix)}</td>
+      <td><span class="lot-statut ${l.statut}">${l.statut === 'libre' ? 'Disponible' : 'Réservé'}</span></td>
+    </tr>`).join('');
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    tbody.querySelectorAll('.lot-row').forEach(r => r.style.opacity = '1');
+  }));
+}
+
+function renderCalendrier(s) {
+  const ca = document.getElementById('ca');
+  ca.innerHTML = `
+    <div class="content-hdr">
+      <div class="c-eyebrow">${s.label}</div>
+      <h2 class="c-title">Calendrier des Travaux</h2>
+      <p class="c-desc">${s.desc}</p>
+    </div>
+    <div class="cal-timeline">
+      ${PHASES.map(p => `
+        <div class="cal-item ${p.status}">
+          <div class="cal-dot"></div>
+          <div class="cal-card">
+            <div class="cal-date">${p.date}</div>
+            <div class="cal-label">${p.label}</div>
+            <div class="cal-detail">${p.detail}</div>
+            <span class="cal-badge ${p.status}">${
+              p.status === 'done' ? 'Réalisé' :
+              p.status === 'current' ? 'En cours' : 'À venir'
+            }</span>
+          </div>
+        </div>`).join('')}
+    </div>`;
+  ca.querySelectorAll('.cal-item').forEach((el, i) => {
+    setTimeout(() => el.classList.add('visible'), i * 70);
+  });
+}
+
+function fc(f) {
+  const tl = {pdf:'PDF',img:'IMG',docx:'WORD',xlsx:'XLS'}[f.type] || f.type.toUpperCase();
+  const tag = f.tag ? `<span class="f-tag">${f.tag}</span>` : '';
+  const sp = q => q.replace(/'/g,"\\'");
+  let acts;
+  if (f.type === 'pdf') {
+    acts = `<button class="btn-view" onclick="openPdf('${sp(f.path)}','${sp(f.name)}');event.stopPropagation()">Consulter</button>
+            <a class="btn-dl" href="${f.path}" download onclick="event.stopPropagation()" title="Télécharger">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            </a>`;
+  } else if (f.type === 'img') {
+    acts = `<button class="btn-view" onclick="openImg('${sp(f.path)}','${sp(f.name)}');event.stopPropagation()">Voir</button>
+            <a class="btn-dl" href="${f.path}" download onclick="event.stopPropagation()" title="Télécharger">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            </a>`;
+  } else {
+    acts = `<a class="btn-view" href="${f.path}" download onclick="event.stopPropagation()">Télécharger</a>`;
+  }
+  const click = f.type === 'pdf' ? `openPdf('${sp(f.path)}','${sp(f.name)}')` :
+                f.type === 'img' ? `openImg('${sp(f.path)}','${sp(f.name)}')` : '';
+  return `<div class="file-card" onclick="${click}">
+    <div class="f-ico ${f.type}">${tl}</div>
+    ${tag}
+    <div class="f-name">${f.name}</div>
+    <div class="f-desc">${f.desc}</div>
+    <div class="f-actions">${acts}</div>
+  </div>`;
+}
+
+/* ── PDF ── */
+function openPdf(p, n) {
+  document.getElementById('ptitle').textContent = n;
+  document.getElementById('piframe').src = p;
+  document.getElementById('pdl').href = p;
+  document.getElementById('pdl').download = n;
+  document.getElementById('pm').classList.remove('hidden');
+}
+function closePdf() {
+  document.getElementById('pm').classList.add('hidden');
+  document.getElementById('piframe').src = '';
+}
+
+/* ── IMAGE ── */
+function openImg(p, n) {
+  const s = SECTIONS.find(x => x.id === CS);
+  IF = s ? s.files.filter(f => f.type === 'img') : [{path:p,name:n}];
+  II = IF.findIndex(f => f.path === p);
+  if (II < 0) { IF = [{path:p,name:n}]; II = 0; }
+  showAt(II);
+  document.getElementById('im').classList.remove('hidden');
+}
+function showAt(i) {
+  II = i;
+  const f = IF[i];
+  document.getElementById('iimg').src = f.path;
+  document.getElementById('icap').textContent = f.name;
+  const many = IF.length > 1;
+  document.getElementById('iprev').style.display = many ? 'flex' : 'none';
+  document.getElementById('inext').style.display = many ? 'flex' : 'none';
+}
+function imgNav(d) {
+  const ni = (II + d + IF.length) % IF.length;
+  const el = document.getElementById('iimg');
+  el.style.transition = 'opacity .15s,transform .15s';
+  el.style.opacity = '0'; el.style.transform = 'scale(.96)';
+  setTimeout(() => {
+    showAt(ni);
+    el.style.transition = 'opacity .22s,transform .22s';
+    el.style.opacity = '1'; el.style.transform = 'scale(1)';
+  }, 150);
+}
+function closeImg() {
+  document.getElementById('im').classList.add('hidden');
+  document.getElementById('iimg').src = '';
+}
+
+/* ── LOGOUT ── */
+function logout() {
+  CU = null; CS = null;
+  document.getElementById('app').classList.add('hidden');
+  document.getElementById('li').value = '';
+  document.getElementById('lp').value = '';
+  document.getElementById('lerr').textContent = '';
+  const ls = document.getElementById('ls');
+  ls.classList.remove('hidden');
+}
+
+/* ── KEYS ── */
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('im').classList.contains('hidden')) {
+    if (e.key === 'ArrowLeft')  imgNav(-1);
+    if (e.key === 'ArrowRight') imgNav(1);
+    if (e.key === 'Escape')     closeImg();
+  }
+  if (!document.getElementById('pm').classList.contains('hidden') && e.key === 'Escape') closePdf();
+});
+document.getElementById('im').addEventListener('click', e => { if (e.target === e.currentTarget) closeImg(); });
+</script>
+</body>
+</html>
