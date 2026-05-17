@@ -424,13 +424,48 @@ body{font-family:'Montserrat',sans-serif;color:var(--ard);background:var(--ard);
 .welcome-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--ard);margin-bottom:6px}
 .welcome-sub{font-size:12px;color:var(--grey);font-weight:400}
 
+/* ── MOBILE NAV ── */
+.mob-nav{
+  display:none;overflow-x:auto;background:var(--blanc);
+  border-bottom:1px solid rgba(184,132,31,.12);
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;flex-shrink:0;
+}
+.mob-nav::-webkit-scrollbar{display:none}
+.mob-nav-inner{display:flex;padding:0 4px}
+.mob-nav-item{
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:8px 10px;cursor:pointer;border-bottom:2px solid transparent;
+  transition:all .18s;min-width:56px;flex-shrink:0;
+}
+.mob-nav-item.active{border-bottom-color:var(--or-d)}
+.mob-nav-item svg{
+  width:16px;height:16px;stroke:var(--grey-l);fill:none;
+  stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;transition:stroke .18s;
+}
+.mob-nav-item.active svg{stroke:var(--or-d)}
+.mob-nav-lbl{
+  font-size:8px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--grey-l);transition:color .18s;text-align:center;line-height:1.3;white-space:nowrap;
+}
+.mob-nav-item.active .mob-nav-lbl{color:var(--or-d)}
+
 /* ── RESPONSIVE ── */
 @media(max-width:720px){
   :root{--sw:0px}
   .sidebar{display:none}
-  .hdr-logo{width:auto;border-right:none}
-  .content-area{padding:18px 14px}
-  .file-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+  .mob-nav{display:block}
+  .hdr-logo{width:auto;border-right:none;padding:0 14px}
+  .hdr-right{gap:10px}
+  .user-info{display:none}
+  .logout-btn{font-size:9px;padding:6px 10px}
+  .content-area{padding:16px 12px}
+  .file-grid{grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:10px}
+  .resa-toolbar{flex-direction:column;align-items:flex-start;gap:12px}
+  .resa-kpis{gap:14px}
+  .lots-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+  .lots-table{min-width:520px}
+  .cal-timeline{padding-left:28px}
+  .c-form{padding:24px 18px}
 }
 </style>
 </head>
@@ -486,6 +521,7 @@ body{font-family:'Montserrat',sans-serif;color:var(--ard);background:var(--ard);
       <button class="logout-btn" onclick="logout()">Déconnexion</button>
     </div>
   </header>
+  <div id="mobnav" class="mob-nav hidden"><div class="mob-nav-inner" id="mobni"></div></div>
   <div class="app-body">
     <aside class="sidebar" id="sb"></aside>
     <main class="content-area" id="ca">
@@ -798,13 +834,27 @@ function renderSidebar() {
     </div>`;
   });
   document.getElementById('sb').innerHTML = h;
+  // Mobile nav
+  const mn = document.getElementById('mobnav');
+  if (mn) mn.classList.remove('hidden');
+  let m = '';
+  sections.forEach(s => {
+    m += `<div class="mob-nav-item" id="mn-${s.id}" onclick="navigate('${s.id}')">
+      <svg viewBox="0 0 24 24">${ICO[s.icon]}</svg>
+      <div class="mob-nav-lbl">${s.label.split(' ')[0]}</div>
+    </div>`;
+  });
+  document.getElementById('mobni').innerHTML = m;
 }
 
 function navigate(id) {
   CS = id;
   document.querySelectorAll('.nav-item').forEach(e => e.classList.remove('active'));
+  document.querySelectorAll('.mob-nav-item').forEach(e => e.classList.remove('active'));
   const n = document.getElementById('n-' + id);
   if (n) n.classList.add('active');
+  const mn = document.getElementById('mn-' + id);
+  if (mn) { mn.classList.add('active'); mn.scrollIntoView({inline:'center',behavior:'smooth'}); }
   const s = SECTIONS.find(x => x.id === id);
   if (s) renderContent(s);
 }
@@ -872,13 +922,13 @@ function renderReservation(s) {
         <div class="resa-kpi red"><div class="kv">${reserves}</div><div class="kl">Réservés</div></div>
       </div>
     </div>
-    <table class="lots-table">
+    <div class="lots-table-wrap"><table class="lots-table">
       <thead><tr>
         <th>N° Lot</th><th>Type</th><th>Surface</th>
         <th>Niveau</th><th>Orientation</th><th>Prix TTC</th><th>Statut</th>
       </tr></thead>
       <tbody id="lotsBody"></tbody>
-    </table>`;
+    </table></div>`;
 
   renderLots('all');
 
