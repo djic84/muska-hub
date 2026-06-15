@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Charte Graphique — MUSKA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  @page{ size: A4; margin: 0; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Montserrat',Arial,sans-serif;
+    color:#1A1714;
+    background:#FAFAF7;
+  }
+  .page{
+    width:210mm;min-height:297mm;
+    padding:18mm 16mm;
+    page-break-after:always;
+    position:relative;
+  }
+  .page:last-child{page-break-after:auto}
+
+  /* ---------- COVER ---------- */
+  .cover{
+    background:#1A1714;
+    color:#FAFAF7;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    text-align:center;
+  }
+  .cover .eyebrow{
+    font-size:11px;letter-spacing:.35em;text-transform:uppercase;
+    color:#C8922A;margin-bottom:28px;
+  }
+  .cover h1{
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-weight:300;font-size:90px;letter-spacing:.18em;
+    margin-bottom:10px;
+  }
+  .cover .sub{
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-style:italic;font-size:20px;color:#C8922A;letter-spacing:.1em;margin-bottom:60px;
+  }
+  .cover .doc-title{
+    font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:#A89A85;
+    border-top:1px solid rgba(245,240,232,.18);
+    padding-top:22px;margin-top:40px;width:100%;max-width:380px;
+  }
+  .cover .foot{
+    position:absolute;bottom:18mm;left:0;right:0;text-align:center;
+    font-size:10px;letter-spacing:.25em;color:#6B6052;text-transform:uppercase;
+  }
+
+  /* ---------- HEADER COMMON ---------- */
+  .hdr{
+    display:flex;justify-content:space-between;align-items:baseline;
+    border-bottom:2px solid #B8841F;padding-bottom:14px;margin-bottom:28px;
+  }
+  .hdr h2{
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-weight:300;font-size:34px;letter-spacing:.04em;color:#1A1714;
+  }
+  .hdr .tag{
+    font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:#8E6516;font-weight:700;
+  }
+  .section-num{
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-style:italic;color:#B8841F;font-size:15px;margin-bottom:4px;
+  }
+  .lead{
+    font-size:13px;line-height:1.7;color:#6B6052;margin-bottom:26px;max-width:600px;
+  }
+
+  /* ---------- LOGO PAGE ---------- */
+  .logo-box{
+    border:1px solid #EDE7DA;background:#fff;
+    display:flex;align-items:center;justify-content:center;
+    height:120px;margin-bottom:10px;
+  }
+  .logo-box.dark{background:#1A1714}
+  .logo-mark{
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-weight:400;font-size:40px;letter-spacing:.22em;color:#8E6516;
+  }
+  .logo-mark.light{color:#F5F0E8}
+  .logo-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:30px}
+  .logo-caption{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#A89A85;text-align:center;margin-top:8px}
+
+  .rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:10px}
+  .rule-card{border:1px solid #EDE7DA;padding:18px;background:#fff}
+  .rule-card h4{
+    font-size:10px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px;
+  }
+  .rule-card.ok h4{color:#4A5C3A}
+  .rule-card.no h4{color:#c0392b}
+  .rule-card p{font-size:11.5px;line-height:1.6;color:#6B6052}
+  .rule-demo{
+    height:60px;border:1px dashed #EDE7DA;display:flex;align-items:center;justify-content:center;
+    margin-bottom:10px;font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;letter-spacing:.18em;color:#8E6516;
+  }
+  .rule-demo.crowded{letter-spacing:.04em;font-size:26px;background:#F5F0E8}
+  .rule-demo.bad-color{color:#4A5C3A;background:#EDE7DA}
+  .rule-demo.bad-bg{background:#8E6516;color:#8E6516}
+
+  /* ---------- COLOR PAGE ---------- */
+  .swatch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:30px}
+  .swatch{border:1px solid #EDE7DA}
+  .swatch .chip{height:78px}
+  .swatch .info{padding:10px 12px;background:#fff}
+  .swatch .name{font-size:11px;font-weight:700;letter-spacing:.06em;margin-bottom:3px}
+  .swatch .hex{font-size:10px;color:#A89A85;letter-spacing:.05em;font-family:monospace}
+  .swatch .role{font-size:10px;color:#6B6052;margin-top:4px;line-height:1.4}
+
+  .usage-note{
+    background:#F5F0E8;border-left:3px solid #B8841F;padding:14px 18px;
+    font-size:11.5px;line-height:1.7;color:#2C2723;margin-top:6px;
+  }
+
+  /* ---------- TYPOGRAPHY PAGE ---------- */
+  .type-block{border:1px solid #EDE7DA;background:#fff;padding:24px;margin-bottom:18px}
+  .type-block .label{
+    font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:#B8841F;font-weight:700;margin-bottom:14px;
+  }
+  .type-block.serif .sample-lg{
+    font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:44px;letter-spacing:.06em;margin-bottom:8px;
+  }
+  .type-block.serif .sample-italic{
+    font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:20px;color:#8E6516;margin-bottom:14px;
+  }
+  .type-block.sans .sample-lg{
+    font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;
+  }
+  .type-block .sample-body{font-size:12px;line-height:1.7;color:#6B6052;max-width:560px}
+  .weight-row{display:flex;gap:24px;margin-top:14px;flex-wrap:wrap}
+  .weight-row .w{font-family:'Montserrat',Arial,sans-serif;font-size:12px;color:#1A1714}
+  .weight-row .w small{display:block;font-size:9px;color:#A89A85;letter-spacing:.15em;text-transform:uppercase;margin-top:4px}
+
+  .pairing{
+    display:flex;align-items:center;gap:18px;border:1px solid #EDE7DA;padding:20px;background:#fff;margin-top:18px;
+  }
+  .pairing .ex-title{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:30px;letter-spacing:.05em}
+  .pairing .ex-sub{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#A89A85;margin-top:6px}
+
+  /* ---------- TONE PAGE ---------- */
+  .value-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
+  .value-card{border:1px solid #EDE7DA;background:#fff;padding:20px}
+  .value-card .num{
+    font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:30px;color:#B8841F;margin-bottom:8px;
+  }
+  .value-card h4{font-size:13px;letter-spacing:.08em;margin-bottom:8px;font-weight:700}
+  .value-card p{font-size:11.5px;line-height:1.65;color:#6B6052}
+
+  .voice-row{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid #EDE7DA;margin-top:6px}
+  .voice-col{padding:18px}
+  .voice-col.yes{background:#fff;border-right:1px solid #EDE7DA}
+  .voice-col.no{background:#F5F0E8}
+  .voice-col h4{font-size:10px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px}
+  .voice-col.yes h4{color:#4A5C3A}
+  .voice-col.no h4{color:#c0392b}
+  .voice-col ul{list-style:none}
+  .voice-col li{font-size:11.5px;line-height:1.8;color:#2C2723;padding-left:14px;position:relative}
+  .voice-col li::before{position:absolute;left:0;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;color:#A89A85}
+  .voice-col.yes li::before{content:"—"}
+  .voice-col.no li::before{content:"—"}
+
+  .footer-bar{
+    position:absolute;bottom:14mm;left:16mm;right:16mm;
+    display:flex;justify-content:space-between;align-items:center;
+    border-top:1px solid #EDE7DA;padding-top:10px;
+    font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#A89A85;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER ============ -->
+<div class="page cover">
+  <div class="eyebrow">Charte Graphique</div>
+  <h1>MUSKA</h1>
+  <div class="sub">TerraOccitana · Programme Libre</div>
+  <div class="doc-title">Identité Visuelle &amp; Recommandations d'Usage</div>
+  <div class="foot">Frontignan · Pinède &amp; Minéral — Édition interne</div>
+</div>
+
+<!-- ============ PAGE 2 — LOGO ============ -->
+<div class="page">
+  <div class="hdr">
+    <h2>Le Logotype</h2>
+    <div class="tag">01 — Identité</div>
+  </div>
+  <div class="section-num">Versions</div>
+  <p class="lead">Le logotype MUSKA se compose du nom de la résidence en lettres capitales espacées, dans la police Cormorant Garamond. Il est décliné en deux versions principales selon le fond d'application.</p>
+
+  <div class="logo-grid">
+    <div>
+      <div class="logo-box"><span class="logo-mark">MUSKA</span></div>
+      <div class="logo-caption">Version principale — fond clair (Calcaire #F5F0E8)</div>
+    </div>
+    <div>
+      <div class="logo-box dark"><span class="logo-mark light">MUSKA</span></div>
+      <div class="logo-caption">Version inversée — fond sombre (Ardoise #1A1714)</div>
+    </div>
+  </div>
+
+  <div class="section-num">Règles d'usage</div>
+  <div class="rule-grid">
+    <div class="rule-card ok">
+      <div class="rule-demo">M U S K A</div>
+      <h4>À faire</h4>
+      <p>Respecter une zone de protection autour du logo équivalente à la hauteur du "M". Conserver les proportions et l'espacement des lettres (.22em).</p>
+    </div>
+    <div class="rule-card no">
+      <div class="rule-demo crowded">MUSKA</div>
+      <h4>À éviter</h4>
+      <p>Ne pas resserrer l'espacement des lettres, ne pas changer la police, ne pas étirer ou déformer le logotype.</p>
+    </div>
+    <div class="rule-card no">
+      <div class="rule-demo bad-color">MUSKA</div>
+      <h4>À éviter</h4>
+      <p>Ne pas recolorer le logo dans une teinte hors de la palette officielle (ex. vert Vigne, gris).</p>
+    </div>
+    <div class="rule-card no">
+      <div class="rule-demo bad-bg">MUSKA</div>
+      <h4>À éviter</h4>
+      <p>Ne pas placer la version dorée sur un fond de couleur proche (faible contraste) — privilégier les fonds Calcaire ou Ardoise.</p>
+    </div>
+  </div>
+
+  <div class="footer-bar"><span>MUSKA — Charte Graphique</span><span>Page 2</span></div>
+</div>
+
+<!-- ============ PAGE 3 — COULEURS ============ -->
+<div class="page">
+  <div class="hdr">
+    <h2>La Palette</h2>
+    <div class="tag">02 — Couleurs</div>
+  </div>
+  <div class="section-num">Couleurs principales</div>
+  <p class="lead">La palette s'inspire des paysages de Frontignan : la pierre calcaire, les vignes du Muscat et les ardoises du littoral. Elle associe des tons minéraux clairs à un doré "or" signature.</p>
+
+  <div class="swatch-grid">
+    <div class="swatch">
+      <div class="chip" style="background:#F5F0E8"></div>
+      <div class="info"><div class="name">Calcaire</div><div class="hex">#F5F0E8</div><div class="role">Fond principal, sections claires</div></div>
+    </div>
+    <div class="swatch">
+      <div class="chip" style="background:#EDE7DA"></div>
+      <div class="info"><div class="name">Calcaire Foncé</div><div class="hex">#EDE7DA</div><div class="role">Fonds secondaires, séparateurs</div></div>
+    </div>
+    <div class="swatch">
+      <div class="chip" style="background:#FAFAF7"></div>
+      <div class="info"><div class="name">Blanc</div><div class="hex">#FAFAF7</div><div class="role">Cartes, surfaces, contrastes</div></div>
+    </div>
+    <div class="swatch">
+      <div class="chip" style="background:#B8841F"></div>
+      <div class="info"><div class="name">Or</div><div class="hex">#B8841F</div><div class="role">Couleur signature, accents, liens</div></div>
+    </div>
+    <div class="swatch">
+      <div class="chip" style="background:#C8922A"></div>
+      <div class="info"><div class="name">Or Clair</div><div class="hex">#C8922A</div><div class="role">Survol, variantes claires</div></div>
+    </div>
+    <div class="swatch">
+      <div class="chip" style="background:#8E6516"></div>
+      <div class="info"><div class="name">Or Foncé</div><div class="hex">#8E6516</div><div class="role">Texte sur fond clair, boutons</div></div>
+    </div>
+    <div class="swatch">
+      <div class="chip" style="background:#1A1714"></div>
+      <div class="info"><div class="name">Ardoise</div><div class="hex">#1A1714</div><div class="role">Texte principal, fonds sombres</div></div>
+    </div>
+    <div class="swatch">
+      <div class="chip" style="background:#2C2723"></div>
+      <div class="info"><div class="name">Ardoise Moyenne</div><div class="hex">#2C2723</div><div class="role">Dégradés, fonds sombres secondaires</div></div>
+    </div>
+    <div class="swatch">
+      <div class="chip" style="background:#4A5C3A"></div>
+      <div class="info"><div class="name">Vigne</div><div class="hex">#4A5C3A</div><div class="role">Accent nature, pictogrammes</div></div>
+    </div>
+    <div class="swatch">
+      <div class="chip" style="background:#6B6052"></div>
+      <div class="info"><div class="name">Gris</div><div class="hex">#6B6052</div><div class="role">Texte secondaire</div></div>
+    </div>
+    <div class="swatch">
+      <div class="chip" style="background:#A89A85"></div>
+      <div class="info"><div class="name">Gris Clair</div><div class="hex">#A89A85</div><div class="role">Légendes, mentions discrètes</div></div>
+    </div>
+  </div>
+
+  <div class="usage-note">
+    <strong>Bon à savoir —</strong> L'or (#B8841F et dérivés) ne doit représenter qu'une touche d'accent : titres en italique, traits de séparation, boutons et liens. Les grandes surfaces restent en tons calcaire / blanc / ardoise pour préserver l'élégance minérale de la marque.
+  </div>
+
+  <div class="footer-bar"><span>MUSKA — Charte Graphique</span><span>Page 3</span></div>
+</div>
+
+<!-- ============ PAGE 4 — TYPOGRAPHIE ============ -->
+<div class="page">
+  <div class="hdr">
+    <h2>La Typographie</h2>
+    <div class="tag">03 — Polices</div>
+  </div>
+  <div class="section-num">Deux polices, deux registres</div>
+  <p class="lead">L'identité MUSKA repose sur l'association d'une serif élégante pour les titres et d'une sans-serif sobre pour les contenus, créant un équilibre entre prestige et clarté.</p>
+
+  <div class="type-block serif">
+    <div class="label">Titres &amp; accents — Cormorant Garamond</div>
+    <div class="sample-lg">Muska — Frontignan</div>
+    <div class="sample-italic">Entre vignes et Méditerranée</div>
+    <p class="sample-body">Utilisée pour les titres principaux (h1, h2), les citations et les accroches. Graisse légère (300), parfois en italique pour les sous-titres et accents éditoriaux. Apporte le caractère « résidence de standing ».</p>
+  </div>
+
+  <div class="type-block sans">
+    <div class="label">Texte courant &amp; interface — Montserrat</div>
+    <div class="sample-lg">Bouton · Navigation · Étiquette</div>
+    <p class="sample-body">Police du corps de texte, des formulaires, boutons et menus. Toujours en majuscules avec un espacement généreux (.04em à .12em) pour les éléments d'interface ; en minuscules pour les paragraphes longs.</p>
+    <div class="weight-row">
+      <div class="w">Regular 400<small>Texte courant</small></div>
+      <div class="w" style="font-weight:500">Medium 500<small>Mise en avant</small></div>
+      <div class="w" style="font-weight:700">Bold 700<small>Boutons / labels</small></div>
+      <div class="w" style="font-weight:800">Extra-Bold 800<small>Surtitres</small></div>
+    </div>
+  </div>
+
+  <div class="section-num" style="margin-top:24px">Exemple d'association</div>
+  <div class="pairing">
+    <div>
+      <div class="ex-title">Résidence Muska</div>
+      <div class="ex-sub">Programme Neuf · Frontignan</div>
+    </div>
+  </div>
+
+  <div class="footer-bar"><span>MUSKA — Charte Graphique</span><span>Page 4</span></div>
+</div>
+
+<!-- ============ PAGE 5 — TON & VALEURS ============ -->
+<div class="page">
+  <div class="hdr">
+    <h2>Ton &amp; Valeurs</h2>
+    <div class="tag">04 — Discours de marque</div>
+  </div>
+  <div class="section-num">Quatre valeurs clés</div>
+
+  <div class="value-grid">
+    <div class="value-card">
+      <div class="num">I</div>
+      <h4>Élégance minérale</h4>
+      <p>Une esthétique épurée, inspirée de la pierre calcaire et des matériaux nobles. Pas de superflu, des lignes sobres et des contrastes doux.</p>
+    </div>
+    <div class="value-card">
+      <div class="num">II</div>
+      <h4>Ancrage terroir</h4>
+      <p>Le vignoble, le Muscat, la pinède et l'étang de Thau : la marque revendique son lien fort avec le territoire de Frontignan.</p>
+    </div>
+    <div class="value-card">
+      <div class="num">III</div>
+      <h4>Art de vivre méditerranéen</h4>
+      <p>Lumière, extérieurs, vue mer — la communication met en avant les usages et les sensations plus que la seule technique du bâti.</p>
+    </div>
+    <div class="value-card">
+      <div class="num">IV</div>
+      <h4>Exigence &amp; rareté</h4>
+      <p>32 logements seulement : un programme à taille humaine, présenté avec un vocabulaire choisi, jamais générique.</p>
+    </div>
+  </div>
+
+  <div class="section-num">Ton éditorial</div>
+  <div class="voice-row">
+    <div class="voice-col yes">
+      <h4>À privilégier</h4>
+      <ul>
+        <li>Un vocabulaire choisi : « cuvée », « résidence », « art de vivre »</li>
+        <li>Des phrases courtes, rythmées, évocatrices</li>
+        <li>Des références précises au territoire (Pinède, Étang de Thau, Muscat)</li>
+        <li>Une tonalité chaleureuse mais sobre</li>
+      </ul>
+    </div>
+    <div class="voice-col no">
+      <h4>À éviter</h4>
+      <ul>
+        <li>Le jargon immobilier générique ("bien", "produit")</li>
+        <li>Les superlatifs excessifs ("le meilleur", "incroyable")</li>
+        <li>Les emojis et la ponctuation expressive (!!!)</li>
+        <li>Les anglicismes superflus</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bar"><span>MUSKA — Charte Graphique</span><span>Page 5</span></div>
+</div>
+
+</body>
+</html>
