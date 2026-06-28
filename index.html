@@ -498,7 +498,7 @@ body{font-family:'Montserrat',sans-serif;color:var(--ard);background:var(--ard);
       <div id="lerr" class="login-error"></div>
       <button type="submit" class="login-btn">Accéder à l'espace privé</button>
     </form>
-    <div class="login-demo">
+    <div class="login-demo" id="demoBlock" style="display:none">
       <p>Accès démo — cliquez pour remplir</p>
       <div class="demo-chips">
         <button type="button" class="demo-chip" onclick="fillDemo('admin')">Admin</button>
@@ -637,7 +637,7 @@ const SECTIONS = [
     ]
   },
   {
-    id:'plans-acq', label:'Plans Logements', icon:'home',
+    id:'plans-acq', label:'Mes Plans', icon:'home',
     desc:'Plans de présentation des appartements T2 à T5',
     roles:['acquereur'],
     files:[
@@ -763,7 +763,7 @@ const LOTS = [
   {num:'A210', type:'T5', surface:102.1,etage:'R+2', orient:'NO', prix:534296,  statut:'libre'},
   {num:'A211', type:'T2', surface:38.5, etage:'R+2', orient:'NO', prix:207823,  statut:'libre'},
   {num:'A212', type:'T2', surface:37.6, etage:'R+2', orient:'NO', prix:202325,  statut:'libre'},
-  {num:'A213', type:'T3', surface:58.5, etage:'R+2', orient:'NO', prix:306783,  statut:'libre'},
+  {num:'A213', type:'T3', surface:58.5, etage:'R+2', orient:'NO', prix:306783,  statut:'reserve'},
   {num:'A214', type:'T3', surface:62.3, etage:'R+2', orient:'NO', prix:325775,  statut:'libre'},
   {num:'A215', type:'T2', surface:38.7, etage:'R+2', orient:'NO', prix:207823,  statut:'libre'},
   {num:'A216', type:'T2', surface:44.1, etage:'R+2', orient:'NO', prix:234812,  statut:'libre'},
@@ -813,6 +813,9 @@ document.getElementById('lf').addEventListener('submit', e => {
 function fillDemo(id) {
   document.getElementById('li').value = id;
   document.getElementById('lp').value = '••••';
+}
+if (location.hostname === 'localhost' || location.hostname === '127.0.0.1' || new URLSearchParams(location.search).has('demo')) {
+  document.getElementById('demoBlock').style.display = '';
 }
 
 /* ── DASHBOARD ── */
